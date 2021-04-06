@@ -24,22 +24,31 @@
     <div class="container" id="container">
         <div class="form-container sign-up-container">
 
-            <form action="Reg.aspx" method="post">
+            <form method="post" runat="server">
                 <h1>Create Account</h1>
 
              
+                <!--<br/>
+                <input type="text" name="name" placeholder="Name" required="required" />
+                <!-- <input type="email" name="email" placeholder="Email" id="email" required />
+                <input type="password" name="password" placeholder="Password" required />
+                <input type="text" name="phoneno" placeholder="phoneno" required />
+            	<!-- <input type="text" name="address" placeholder="Address"/> -->
                 <br/>
-                <input type="text" name="name" placeholder="Name"/>
-                <input type="email" name="email" placeholder="Email"/>
-                <input type="password" name="password" placeholder="Password"/>
-                <input type="text" name="phoneno" placeholder="phoneno"/>
-            	<input type="text" name="address" placeholder="Address"/>
-                <br/>
-                <button>SignUp</button>
+                <!-- <asp:TextBox runat="server" ID="name" placeholder="Name"/> -->
+                <input type="text" name="uname" id="uname" placeholder="Name" required="required" />
+                <asp:TextBox runat="server" ID="email" placeholder="Email"/><asp:RegularExpressionValidator ErrorMessage="Enter valid email" ControlToValidate="email" runat="server" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ForeColor="Red" />
+                <input type="password" name="password" id="password" placeholder="Password" required />
+                <asp:DropDownList CssClass="input" ID="gender" runat="server" placeholder="Gender">
+                    <asp:ListItem>Male</asp:ListItem>
+                    <asp:ListItem>Female</asp:ListItem>
+                </asp:DropDownList>
+                <asp:TextBox runat="server" ID="phoneno" placeholder="Phone Number"/><asp:RegularExpressionValidator ErrorMessage="Enter valid phone number" ControlToValidate="phoneno" runat="server" ForeColor="Red" ValidationExpression="\d{10}" />
+                <asp:Button CssClass="button" runat="server" ID="Button1" Text="Sign Up" OnClick="signin_Click"/>
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form method="post" runat="server">
+            <form method="post" action="Reg.aspx">
                 <h1>Login</h1>
 
                 <br/>
@@ -47,7 +56,7 @@
                 <input type="email" name="email" placeholder="Email"/>
                 <input type="password" name="password1" placeholder="Password" size="20"/>
 
-                <asp:Button CssClass="button" runat="server" ID="signin" Text="Sign In" OnClick="signin_Click"/>
+                <button>SignIn</button>
             </form>
         </div>
         <div class="overlay-container">

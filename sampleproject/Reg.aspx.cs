@@ -14,11 +14,8 @@ namespace sampleproject
         {
             NameValueCollection userdata;
             userdata = Request.Form;
-            Response.Write(userdata["name"]+"<br>");
             Response.Write(userdata["email"] + "<br>");
-            Response.Write(userdata["password"] + "<br>");
-            Response.Write(userdata["phoneno"] + "<br>");
-            Response.Write(userdata["address"] + "<br>");
+            Response.Write(userdata["password1"] + "<br>");
         }
     }
 }
