@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.OleDb;
 
 namespace sampleproject
 {
@@ -14,8 +15,22 @@ namespace sampleproject
         {
             NameValueCollection userdata;
             userdata = Request.Form;
-            Response.Write(userdata["email"] + "<br>");
-            Response.Write(userdata["password1"] + "<br>");
+            string email = userdata["email"];
+            string pass = userdata["password1"];
+            //Response.Write(userdata["email"] + "<br>");
+            //Response.Write(userdata["password1"] + "<br>");
+            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\mjosh\\Documents\\kwitbook.accdb");
+
+            con.Open();
+
+            string query = "select email, [password] from users where email='"+email+"' AND [password]='"+pass+"'";
+
+            OleDbCommand cmd = new OleDbCommand(query, con);
+            OleDbDataReader dr = cmd.ExecuteReader();
+            if (dr.Read())
+                Response.Redirect("Home.aspx");
+            else
+                Response.Write("Incorrect email or password");
         }
     }
 }

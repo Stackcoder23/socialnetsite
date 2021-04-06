@@ -17,15 +17,25 @@ namespace sampleproject
 
         protected void signin_Click(object sender, EventArgs e)
         {
-            //OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\mjosh\\Documents\\kwitbook.accdb");
+            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\mjosh\\Documents\\kwitbook.accdb");
 
-            //con.Open();
+            con.Open();
 
             string name = Request["uname"];
             string uemail = email.Text;
             string pass = Request["password"];
+            string ugender = gender.SelectedValue;
             string phone = phoneno.Text;
 
+            string query = "insert into users(uname, type, email, [password], gender, phoneno) values ('"+name+"', 'user','"+uemail+"','"+pass+"','"+ugender+"','"+phone+"')";
+
+            OleDbCommand cmd = new OleDbCommand(query, con);
+            int x = cmd.ExecuteNonQuery();
+
+            if (x > 0)
+                Response.Redirect("loginreg.aspx");
+            else
+                Response.Write("Not Inserted");
             //Response.Redirect("Home.aspx");
         }
     }
