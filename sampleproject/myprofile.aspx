@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="myprofile.aspx.cs" Inherits="sampleproject.myprofile" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="sampleproject.Home" %>
 
 <!DOCTYPE html>
 
@@ -37,17 +37,17 @@
     </div>
     <br />
 
-    <h2 style="margin-left: 40%"><% Response.Write(Session["User"]); %></h2><br />
-    <p style="margin-left: 40%"> - Update your bio</p>
-    <!--<p style="margin-left: 40%"> - Papa Ki pari</p>
-    <p style="margin-left: 40%"> - Lives on Mars</p>-->
-    <button onclick="location.href = 'updatebio.aspx'" style="margin-left: 40%">Update Bio</button>
+    <h2 style="margin-left: 40%">Angel Priya</h2><br />
+    <p style="margin-left: 40%"> - Not yet working i am still studying</p>
+    <p style="margin-left: 40%"> - Papa Ki pari</p>
+    <p style="margin-left: 40%"> - Lives on Mars</p>
+    <button style="margin-left: 40%">Update Bio</button>
     
     <br />
     <br />
     
     <br /><br />        
-    <!--<div style="margin-left: 20%; margin-right: 20%; border:double; padding: 2% 2% 2% 2%">
+    <div style="margin-left: 20%; margin-right: 20%; border:double; padding: 2% 2% 2% 2%">
         <br />
         <asp:Image CssClass="profilepic" ID="Image5" runat="server" ImageUrl="https://picsum.photos/40/40" />
         <b>&nbsp;&nbsp;&nbsp; Angel Priya</b><br />
@@ -64,8 +64,7 @@
         <p>Good Morning</p>
         <asp:Image ID="Image4" runat="server" ImageUrl="https://picsum.photos/800/400" />
         <br />
-    </div><br />-->
-    <%=showmydata()%>
+    </div><br />
     
             
     
