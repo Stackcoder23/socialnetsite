@@ -23,12 +23,17 @@ namespace sampleproject
 
             con.Open();
 
-            string query = "select email, [password] from users where email='"+email+"' AND [password]='"+pass+"'";
+            string query = "select * from users where email='"+email+"' AND [password]='"+pass+"'";
 
             OleDbCommand cmd = new OleDbCommand(query, con);
             OleDbDataReader dr = cmd.ExecuteReader();
             if (dr.Read())
+            {
+                Session["user"] = dr.GetString(1);
+                Session["id"] = dr.GetInt32(0);
+                Session["email"] = dr.GetString(3);
                 Response.Redirect("Home.aspx");
+            }
             else
                 Response.Write("Incorrect email or password");
         }

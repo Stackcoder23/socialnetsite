@@ -74,6 +74,7 @@
     <Content Include="profile.aspx" />
     <Content Include="Reg.aspx" />
     <Content Include="style.css" />
+    <Content Include="updatebio.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +113,13 @@
     </Compile>
     <Compile Include="Reg.aspx.designer.cs">
       <DependentUpon>Reg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="updatebio.aspx.cs">
+      <DependentUpon>updatebio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="updatebio.aspx.designer.cs">
+      <DependentUpon>updatebio.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
