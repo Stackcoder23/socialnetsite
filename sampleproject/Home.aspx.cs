@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 using System.Data.OleDb;
 
 namespace sampleproject
@@ -16,13 +17,39 @@ namespace sampleproject
             
         }
 
+        [System.Web.Script.Services.ScriptMethod()]
+        [System.Web.Services.WebMethod]
+
+        public static List<string> searchuser(string prefixText)
+        {
+            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\mjosh\\Documents\\kwitbook.accdb");
+            con.Open();
+            OleDbDataAdapter da;
+            DataTable dt;
+            DataTable Result = new DataTable();
+            string str = "select uname from users where uname like '"+prefixText+"%'";
+
+            da = new OleDbDataAdapter(str, con);
+            dt = new DataTable();
+            da.Fill(dt);
+ 
+            List<string> output = new List<string>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+                output.Add(dt.Rows[i][0].ToString());
+
+            con.Close();
+            return output;
+        }
+
+
         public string showdata()
         {
             string html = "";
+            int userid = (int)Session["id"];
             OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\mjosh\\Documents\\kwitbook.accdb");
             con.Open();
 
-            string query = "select * from posts order by postID desc";
+            string query = "select * from posts where userID in (select following from follows where follower = "+userid+") order by postID desc";
 
             OleDbCommand cmd = new OleDbCommand(query, con);
 
@@ -30,8 +57,22 @@ namespace sampleproject
 
             while (reader.Read())
             {
+                int p = reader.GetInt32(0);
+                int cmtcount = 0;
+                string cmtquery = "select * from comments where postID = " + p + "";
+
+                OleDbCommand cmtcmd = new OleDbCommand(cmtquery, con);
+
+                OleDbDataReader cmtreader = cmtcmd.ExecuteReader();
+
+                while (cmtreader.Read())
+                {
+                    cmtcount += 1;
+                }
+
                 string pic = "";
                 string status = "";
+                string dp = "";
                 if (!reader.IsDBNull(1))
                 {
                     pic = reader.GetString(1);
@@ -40,14 +81,30 @@ namespace sampleproject
                 {
                     status = reader.GetString(2);
                 }
-                html += "<div style='margin-left: 20%; margin-right: 20%; border: double; padding: 2% 2% 2% 2% '><br>" +
-                    "<img class='profilepic' src='https://picsum.photos/40/40' alt='image'>" +
-                    "&nbsp;&nbsp;&nbsp;<b>Tony Stark</b><br /><br />" +
+                int user = reader.GetInt32(3);
+                string query2 = "select uname from users where userID = "+user+"";
+                OleDbCommand cmd2 = new OleDbCommand(query2, con);
+                string name = (string)cmd2.ExecuteScalar();
+
+                string query3 = "select profilepic from profiledetails where userID = " + user + "";
+                OleDbCommand cmd3 = new OleDbCommand(query3, con);
+                try
+                {
+                    dp = (string)cmd3.ExecuteScalar();
+                }
+                catch(Exception e)
+                {
+                    dp = "blank";
+                }
+
+                html += "<a style='text-decoration:none;color:black' href='postdetails.aspx?p="+p+"&user="+user+"'><div style='margin-left: 20%; margin-right: 20%; border: double; padding: 2% 2% 2% 2% '><br>" +
+                    "<img style='width:50px' class='profilepic' src='/dp/" + dp + "' alt='image' onerror= this.src='dp.jpg'>" +
+                    "&nbsp;&nbsp;&nbsp;<b>"+name+"</b><br /><br />" +
                     "<p>"+status+"</p>" +
-                    "<img style='width:800px' src='/posts/"+pic+"'>" +
-                "</div><br>";
+                    "<img style='width:800px' src='/posts/"+pic+"'><br>" +
+                "<p>"+cmtcount+" Comments</p></div></a><br>";
             }
-            
+            con.Close();
 
             return html;
         }
@@ -69,11 +126,12 @@ namespace sampleproject
                 int x = cmd.ExecuteNonQuery();
                 if (x > 0)
                 {
-                    Response.Write("<script>alert('inserted')</script>");
+                    //Response.Write("<script>alert('inserted')</script>");
                     Response.Redirect("Home.aspx");
                 }
                 else
                     Response.Write("<script>alert('Not inserted')</script>");
+               
             }
             else if(postedFile != null && postedFile.ContentLength > 0)
             {
@@ -86,11 +144,12 @@ namespace sampleproject
                 int x = cmd.ExecuteNonQuery();
                 if (x > 0)
                 {
-                    Response.Write("<script>alert('inserted')</script>");
+                    //Response.Write("<script>alert('inserted')</script>");
                     Response.Redirect("Home.aspx");
                 }
                 else
                     Response.Write("<script>alert('Not inserted')</script>");
+                
             }
             else if(status != "")
             {
@@ -100,7 +159,7 @@ namespace sampleproject
                 int x = cmd.ExecuteNonQuery();
                 if (x > 0)
                 {
-                    Response.Write("<script>alert('inserted')</script>");
+                    //Response.Write("<script>alert('inserted')</script>");
                     Response.Redirect("Home.aspx");
                 }
                 else
@@ -110,6 +169,13 @@ namespace sampleproject
             {
                 Response.Write("<script>alert('Empty Field')</script>");
             }
+
+        }
+
+        protected void search(object sender, EventArgs e)
+        {
+            string name = searchbar.Text;
+            Response.Redirect("profile.aspx?name="+name+"");
         }
     }
 }

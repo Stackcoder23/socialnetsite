@@ -20,7 +20,7 @@
         <div class="bubble"></div>
         <div class="bubble"></div>
     </div>
-
+    
     <div class="container" id="container">
         <div class="form-container sign-up-container">
 

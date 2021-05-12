@@ -15,30 +15,27 @@
      <nav>
       <ul>
         <li><a href="Home.aspx">Home</a></li>
-        <li><a href="#0">About</a></li>
-        <li><a href="#0">Following</a></li>
-        <li><a href="#0">Followers</a></li>
+        <li><a href="about.aspx">About</a></li>
+        <li><a href="following.aspx">Following</a></li>
+        <li><a href="followers.aspx">Followers</a></li>
         <li><a href="myprofile.aspx">Profile</a></li>
-        <!-- <li><a href="#0">Contact</a></li> -->
-        <li><a href="#0">Logout</a></li>
+        <li><a href="logout.aspx">Logout</a></li>
       </ul>
     </nav>
     <br />
     <br />
-    <div style="margin-left: 40%"><asp:Image ID="Image2" runat="server" ImageUrl="https://picsum.photos/200/200" />&nbsp;&nbsp;&nbsp;
-        <!--<form action="/" method="post" runat="server">
-            Update Profile photo : <asp:FileUpload ID="FileUpload1" runat="server" />
-        </form>-->
+    <div style="margin-left: 40%"><img style='width:200px' src="/dp/<%=profilepic()%>" onerror= "this.src='dp.jpg'" />&nbsp;&nbsp;&nbsp;
+        
         <br />
-        <form action="/" method="post">
-        Update Profile pic : <input type="file" accept="image/*"/><br />
-        <button>Update</button>
+        <form id="form1" runat="server" enctype="multipart/form-data">
+        Update Profile pic : <input name="FileUpload1" id="FileUpload1" type="file" accept="image/*"/><br />
+            <asp:Button Text="Update" runat="server" ID="updatedp" OnClick="updatedp_Click" />
         </form>
     </div>
     <br />
 
     <h2 style="margin-left: 40%"><% Response.Write(Session["User"]); %></h2><br />
-    <p style="margin-left: 40%"> - Update your bio</p>
+    <p style="margin-left: 40%">  <%=showmybio()%></p>
     <!--<p style="margin-left: 40%"> - Papa Ki pari</p>
     <p style="margin-left: 40%"> - Lives on Mars</p>-->
     <button onclick="location.href = 'updatebio.aspx'" style="margin-left: 40%">Update Bio</button>
@@ -47,24 +44,7 @@
     <br />
     
     <br /><br />        
-    <!--<div style="margin-left: 20%; margin-right: 20%; border:double; padding: 2% 2% 2% 2%">
-        <br />
-        <asp:Image CssClass="profilepic" ID="Image5" runat="server" ImageUrl="https://picsum.photos/40/40" />
-        <b>&nbsp;&nbsp;&nbsp; Angel Priya</b><br />
-        <br />
-        <asp:Image ID="Image1" runat="server" ImageUrl="https://picsum.photos/800/400" />
-        <br />
-    </div><br />
-    <div style="margin-left: 20%; margin-right: 20%; border:double; padding: 2% 2% 2% 2%">
-        <br />
-        <asp:Image CssClass="profilepic" ID="Image6" runat="server" ImageUrl="https://picsum.photos/40/40" />
-        &nbsp;&nbsp;&nbsp;
-        <b>Angel Priya</b><br />
-        <br />
-        <p>Good Morning</p>
-        <asp:Image ID="Image4" runat="server" ImageUrl="https://picsum.photos/800/400" />
-        <br />
-    </div><br />-->
+    
     <%=showmydata()%>
     
             

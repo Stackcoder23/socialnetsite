@@ -27,13 +27,14 @@ namespace sampleproject
             string ugender = gender.SelectedValue;
             string phone = phoneno.Text;
 
-            string query = "insert into users(uname, type, email, [password], gender, phoneno) values ('"+name+"', 'user','"+uemail+"','"+pass+"','"+ugender+"','"+phone+"')";
+            string query = "insert into users(uname, type, email, [password], gender, phoneno) values ('" + name + "', 'user','" + uemail + "','" + pass + "','" + ugender + "','" + phone + "')";
 
             OleDbCommand cmd = new OleDbCommand(query, con);
             int x = cmd.ExecuteNonQuery();
-
-            if (x > 0)
+            if (x > 0) {
+                Response.Write("Inserted");
                 Response.Redirect("loginreg.aspx");
+            }
             else
                 Response.Write("Not Inserted");
             //Response.Redirect("Home.aspx");

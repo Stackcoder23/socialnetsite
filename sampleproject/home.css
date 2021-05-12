@@ -135,6 +135,16 @@ ul {
     background: #f1f1f1;
 }
 
+.searchbar {
+    margin-left: 55%;
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 20%;
+    background: #f1f1f1;
+}
+
 #searchbtn {
     float: left;
     width: 5%;

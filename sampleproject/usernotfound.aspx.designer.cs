@@ -11,16 +11,7 @@ namespace sampleproject
 {
 
 
-    public partial class profile
+    public partial class usernotfound
     {
-
-        /// <summary>
-        /// follow control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button follow;
     }
 }

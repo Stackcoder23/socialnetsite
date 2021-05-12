@@ -11,7 +11,7 @@ namespace sampleproject
 {
 
 
-    public partial class myprofile
+    public partial class postdetails
     {
 
         /// <summary>
@@ -24,12 +24,21 @@ namespace sampleproject
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// updatedp control.
+        /// comment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button updatedp;
+        protected global::System.Web.UI.WebControls.TextBox comment;
+
+        /// <summary>
+        /// cmt_button control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button cmt_button;
     }
 }
